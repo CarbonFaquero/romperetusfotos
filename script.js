@@ -75,19 +75,43 @@ function burn(x, y) {
 }
 
 // Eventos
-canvas.addEventListener("mousemove", (e) => {
-    const now = Date.now();
-    if (now - lastBurn < 30) return;
-    lastBurn = now;
-
+// Función unificada para obtener coordenadas
+function getCoords(e) {
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Si es touch, usamos el primer dedo; si no, el evento de mouse
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    return {
+        x: (clientX - rect.left) * (canvas.width / rect.width),
+        y: (clientY - rect.top) * (canvas.height / rect.height)
+    };
+}
 
-    if (originalImage && e.buttons === 1) { // Solo quema si se mantiene el click apretado
-        burn(x, y);
-    }
+// Eventos de Mouse
+canvas.addEventListener("mousedown", (e) => { drawing = true; const p = getCoords(e); burn(p.x, p.y); });
+window.addEventListener("mouseup", () => drawing = false);
+canvas.addEventListener("mousemove", (e) => {
+    if (drawing) { const p = getCoords(e); burn(p.x, p.y); }
 });
+
+// Eventos de Touch (Celulares)
+canvas.addEventListener("touchstart", (e) => {
+    drawing = true;
+    const p = getCoords(e);
+    burn(p.x, p.y);
+    e.preventDefault(); // Evita que la pantalla se mueva al tocar
+}, { passive: false });
+
+canvas.addEventListener("touchmove", (e) => {
+    if (drawing) {
+        const p = getCoords(e);
+        burn(p.x, p.y);
+    }
+    e.preventDefault();
+}, { passive: false });
+
+canvas.addEventListener("touchend", () => drawing = false);
 
 // Control de Música Manual
 btnMusica.addEventListener("click", () => {
