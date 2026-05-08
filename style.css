@@ -1,5 +1,4 @@
-/* 1. Importamos fuentes con más personalidad */
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 *{
     margin:0;
@@ -7,16 +6,22 @@
     box-sizing:border-box;
 }
 
-body{
-    /* Cambio: Degradado radial para dar profundidad (efecto viñeta) */
-    background: radial-gradient(circle, #251005 0%, #0a0a0a 100%);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    /* Cambio: Fuente Oswald para un look más moderno y robusto */
+body {
+    /* Combinamos el degradado con una imagen de textura */
+    background: 
+        radial-gradient(circle, rgba(37, 16, 5, 0.4) 0%, rgba(10, 10, 10, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1769107307307-a26735d4476a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHBhcGVyJTIwZmlyZXxlbnwwfHwwfHx8MA%3D%3D'); 
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* La imagen se queda quieta mientras haces scroll */
+    
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Oswald', sans-serif;
-    color:white;
+    color: white;
 }
 
 .container{
@@ -27,9 +32,9 @@ h1{
     margin-bottom:25px;
     color: #ff4500;
     /* Cambio: Fuente Permanent Marker para el estilo "rebelde" */
-    font-family: 'Permanent Marker', cursive;
-    font-size: 60px;
-    letter-spacing: 2px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 70px;
+    letter-spacing: 4px;
     text-shadow:
         3px 3px 0px #000,
         0 0 20px rgba(255, 69, 0, 0.8),
@@ -67,9 +72,9 @@ canvas {
     touch-action: none; /* Desactiva gestos del navegador para que no interfieran */
 
     /* Cambio: Cursor de fuego (puntero de encendedor) */
-    cursor: url('https://cdn-icons-png.flaticon.com/32/426/426833.png') 16 16, crosshair;
+    cursor: url('https://cdn-icons-png.flaticon.com/128/908/908153.png') 16 16, crosshair;
 }
-
+    
 .controls{
     margin-top:20px;
 }
